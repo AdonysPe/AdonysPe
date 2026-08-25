@@ -40,10 +40,9 @@ All of my projects are available at&nbsp;
 
 <div align="center">
 
-**GitHub Stats**
+**Random dev quote**
 
-<img src="https://github-readme-stats.vercel.app/api?username=AdonysPe&show_icons=true&theme=dark_dimmed&hide_border=true&bg_color=00000000&title_color=00F7FF&icon_color=00F7FF" width="49%" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AdonysPe&layout=compact&theme=dark_dimmed&hide_border=true&bg_color=00000000&title_color=00F7FF" width="41%" />
+<img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark" alt="dev quote" width="60%" />
 
 </div>
 
