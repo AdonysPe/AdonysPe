@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=150&section=header&text=Adonys%20Pereda&fontSize=42&fontColor=00F7FF&animation=fadeIn&fontAlignY=40&desc=Software%20Development%20Student&descAlignY=60&descSize=18&descColor=8892b0" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=150&section=header&text=Adonys%20Pereda&fontSize=42&fontColor=00F7FF&animation=fadeIn&fontAlignY=40&desc=Software%20Developer&descAlignY=60&descSize=18&descColor=8892b0" width="100%"/>
 </p>
 
 <div align="center">
 
 All of my projects are available at&nbsp;
-[**my portfolio →**](https://cv-portfolio-mnlst.vercel.app/)
+[**my portfolio →**](https://portfolio-nu-seven-62.vercel.app/)
 
 <sub>
 <img src="https://komarev.com/ghpvc/?username=AdonysPe&label=views&color=1a1a2e&style=flat" alt="profile views" height="20"/>
