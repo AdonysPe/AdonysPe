@@ -82,7 +82,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=AdonysPe&bg_color=0d1117&color=8892b0&line=00F7FF&point=ffffff&area=true&area_color=00F7FF&hide_border=true&custom_title=Last%2031%20days" alt="activity graph" width="56%" />
+  <img src="https://raw.githubusercontent.com/AdonysPe/AdonysPe/output/activity.svg" alt="activity graph" width="54%" />
   <img src="https://raw.githubusercontent.com/AdonysPe/AdonysPe/output/languages.svg" alt="most used languages" width="42%" />
 </p>
 

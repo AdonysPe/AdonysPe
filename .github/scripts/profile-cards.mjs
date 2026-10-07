@@ -1,5 +1,6 @@
-// Generates two SVG cards for the profile README, counting private repos too:
+// Generates SVG cards for the profile README, counting private repos too:
 //   dist/year.svg       -> this year's stats + Jan–Dec contribution calendar
+//   dist/activity.svg   -> contributions per day over the last 31 days
 //   dist/languages.svg  -> most used languages across every repo you own
 // Needs GH_TOKEN = a classic PAT with `repo` + `read:user` scopes.
 
@@ -30,8 +31,11 @@ const year = now.getUTCFullYear();
 const today = now.toISOString().slice(0, 10);
 
 const { viewer } = await gql(
-  `query($from: DateTime!, $to: DateTime!) {
+  `query($from: DateTime!, $to: DateTime!, $recentFrom: DateTime!) {
     viewer {
+      recent: contributionsCollection(from: $recentFrom, to: $to) {
+        contributionCalendar { weeks { contributionDays { date contributionCount } } }
+      }
       contributionsCollection(from: $from, to: $to) {
         totalCommitContributions
         restrictedContributionsCount
@@ -42,7 +46,7 @@ const { viewer } = await gql(
       }
     }
   }`,
-  { from: `${year}-01-01T00:00:00Z`, to: now.toISOString() },
+  { from: `${year}-01-01T00:00:00Z`, to: now.toISOString(), recentFrom: new Date(now.getTime() - 31 * 86400000).toISOString() },
 );
 
 const cc = viewer.contributionsCollection;
@@ -146,7 +150,29 @@ langs.forEach(([name, t], i) => {
 });
 lsvg += `</svg>`;
 
+// ---------- activity.svg ----------
+const recent = viewer.recent.contributionCalendar.weeks.flatMap((w) => w.contributionDays).slice(-31);
+const AW = 500, AH = LH, PX = 20, top = 52, bottom = AH - 34;
+const max = Math.max(4, ...recent.map((d) => d.contributionCount));
+const step = (AW - 2 * PX) / Math.max(1, recent.length - 1);
+const pts = recent.map((d, i) => `${(PX + i * step).toFixed(1)},${(bottom - (d.contributionCount / max) * (bottom - top)).toFixed(1)}`);
+const short = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}`;
+let asvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${AW}" height="${AH}" viewBox="0 0 ${AW} ${AH}" font-family="${FONT}">
+<rect x="0.5" y="0.5" width="${AW - 1}" height="${AH - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+<text x="20" y="32" fill="#e6edf3" font-size="15" font-weight="600">Last 31 days</text>
+<text x="${AW - 20}" y="32" fill="#9198a1" font-size="11" text-anchor="end">peak ${max} / day</text>
+<line x1="${PX}" y1="${top}" x2="${AW - PX}" y2="${top}" stroke="#21262d"/>
+<line x1="${PX}" y1="${bottom}" x2="${AW - PX}" y2="${bottom}" stroke="#30363d"/>
+<polygon points="${pts.join(' ')} ${AW - PX},${bottom} ${PX},${bottom}" fill="${ACCENT}" fill-opacity="0.12"/>
+<polyline points="${pts.join(' ')}" fill="none" stroke="${ACCENT}" stroke-width="2.5" stroke-linejoin="round"/>`;
+if (recent.length) {
+  asvg += `<text x="${PX}" y="${AH - 14}" fill="#9198a1" font-size="11">${short(recent[0].date)}</text>
+<text x="${AW - PX}" y="${AH - 14}" fill="#9198a1" font-size="11" text-anchor="end">${short(recent[recent.length - 1].date)}</text>`;
+}
+asvg += `</svg>`;
+
 await mkdir(OUT, { recursive: true });
 await writeFile(`${OUT}/year.svg`, svg);
+await writeFile(`${OUT}/activity.svg`, asvg);
 await writeFile(`${OUT}/languages.svg`, lsvg);
 console.log(`year.svg: ${cc.contributionCalendar.totalContributions} contributions, streak ${current}/${longest}; languages.svg: ${langs.length} languages`);
