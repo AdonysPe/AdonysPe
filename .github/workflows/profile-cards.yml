@@ -1,0 +1,45 @@
+name: Profile cards
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Year card + languages, including private repos (needs the METRICS_TOKEN secret)
+      - name: Generate year & language cards
+        run: node .github/scripts/profile-cards.mjs
+        env:
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          OUT_DIR: dist
+          ACCENT: "#00F7FF"
+
+      # Contribution snake (reads the same public graph, which includes private counts when enabled)
+      - uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg?palette=github-dark&color_snake=#00F7FF&color_dots=#161b22,#0b4a52,#0a7c86,#00b8c2,#00F7FF
+
+      - name: Publish to the output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: Update profile cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
