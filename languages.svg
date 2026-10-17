@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="152" viewBox="0 0 420 152" font-family="-apple-system, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+<rect x="0.5" y="0.5" width="419" height="151" rx="10" fill="#0d1117" stroke="#30363d"/>
+<text x="20" y="32" fill="#e6edf3" font-size="15" font-weight="600">Most used languages</text>
+<clipPath id="bar"><rect x="20" y="46" width="380" height="10" rx="5"/></clipPath><g clip-path="url(#bar)"><rect x="20" y="46" width="239.35417212818237" height="10" fill="#3178c6"/><rect x="259.35417212818237" y="46" width="95.38220837855233" height="10" fill="#e34c26"/><rect x="354.7363805067347" y="46" width="22.44719501252038" height="10" fill="#f1e05a"/><rect x="377.18357551925504" y="46" width="15.954990533372797" height="10" fill="#663399"/><rect x="393.1385660526278" y="46" width="2.660301710570206" height="10" fill="#336790"/><rect x="395.798867763198" y="46" width="2.4679210534970144" height="10" fill="#ff5a03"/></g><circle cx="25" cy="80" r="5" fill="#3178c6"/>
+<text x="36" y="84" fill="#c9d1d9" font-size="12">TypeScript <tspan fill="#9198a1">63.0%</tspan></text><circle cx="215" cy="80" r="5" fill="#e34c26"/>
+<text x="226" y="84" fill="#c9d1d9" font-size="12">HTML <tspan fill="#9198a1">25.1%</tspan></text><circle cx="25" cy="104" r="5" fill="#f1e05a"/>
+<text x="36" y="108" fill="#c9d1d9" font-size="12">JavaScript <tspan fill="#9198a1">5.9%</tspan></text><circle cx="215" cy="104" r="5" fill="#663399"/>
+<text x="226" y="108" fill="#c9d1d9" font-size="12">CSS <tspan fill="#9198a1">4.2%</tspan></text><circle cx="25" cy="128" r="5" fill="#336790"/>
+<text x="36" y="132" fill="#c9d1d9" font-size="12">PLpgSQL <tspan fill="#9198a1">0.7%</tspan></text><circle cx="215" cy="128" r="5" fill="#ff5a03"/>
+<text x="226" y="132" fill="#c9d1d9" font-size="12">Astro <tspan fill="#9198a1">0.6%</tspan></text></svg>
